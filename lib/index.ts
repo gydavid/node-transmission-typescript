@@ -51,9 +51,9 @@ export class Transmission {
         });
     }
 
-    public remove(ids: number[], del: boolean = false): Promise<any> {
+    public move(ids: number[] | number, location: string, move: boolean = true): Promise<any> {
         return new Promise((resolve, reject) => {
-            return this.transmission.remove(ids, del, (err, args) => {
+            return this.transmission.move(ids, location, move, (err, args) => {
                 if (err) {
                     return reject(err);
                 }
@@ -61,6 +61,17 @@ export class Transmission {
             });
         });
     }
+
+    public remove(ids: number[] | number, del: boolean = false): Promise<any> {
+      return new Promise((resolve, reject) => {
+          return this.transmission.remove(ids, del, (err, args) => {
+              if (err) {
+                  return reject(err);
+              }
+              resolve(args);
+          });
+      });
+  }
 
     public active(): Promise<ITorrentRes> {
         return new Promise((resolve, reject) => {
@@ -73,7 +84,7 @@ export class Transmission {
         });
     }
 
-    public stop(ids: number[]): Promise<any> {
+    public stop(ids: number[] | number): Promise<any> {
         return new Promise((resolve, reject) => {
             return this.transmission.stop(ids, (err, args) => {
                 if (err) {
@@ -84,7 +95,7 @@ export class Transmission {
         });
     }
 
-    public start(ids: number[]): Promise<any> {
+    public start(ids: number[] | number): Promise<any> {
         return new Promise((resolve, reject) => {
             return this.transmission.start(ids, (err, args) => {
                 if (err) {
@@ -95,7 +106,7 @@ export class Transmission {
         });
     }
 
-    public startNow(ids: number[]): Promise<any> {
+    public startNow(ids: number[] | number): Promise<any> {
         return new Promise((resolve, reject) => {
             return this.transmission.startNow(ids, (err, args) => {
                 if (err) {
@@ -105,7 +116,7 @@ export class Transmission {
             });
         });
     }
-    public verify(ids: number[]) {
+    public verify(ids: number[] | number) {
         return new Promise((resolve, reject) => {
             return this.transmission.verify(ids, (err, args) => {
                 if (err) {
@@ -115,7 +126,7 @@ export class Transmission {
             });
         });
     }
-    public reannounce(ids: number[]) {
+    public reannounce(ids: number[] | number) {
         return new Promise((resolve, reject) => {
             return this.transmission.reannounce(ids, (err, args) => {
                 if (err) {
@@ -168,7 +179,7 @@ export class Transmission {
         });
     }
 
-    public get(ids?: number[]): Promise<ITorrent[]> {
+    public get(ids?: number[] | number): Promise<ITorrent[]> {
         return new Promise((resolve, reject) => {
             if (ids) {
                 this.transmission.get(ids, (err, torrents: ITorrentRes) => {
