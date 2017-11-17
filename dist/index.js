@@ -38,6 +38,16 @@ class Transmission {
             });
         });
     }
+    move(ids, location, move = true) {
+        return new Promise((resolve, reject) => {
+            return this.transmission.move(ids, location, move, (err, args) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(args);
+            });
+        });
+    }
     remove(ids, del = false) {
         return new Promise((resolve, reject) => {
             return this.transmission.remove(ids, del, (err, args) => {

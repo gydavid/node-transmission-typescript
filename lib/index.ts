@@ -63,15 +63,15 @@ export class Transmission {
     }
 
     public remove(ids: number[] | number, del: boolean = false): Promise<any> {
-      return new Promise((resolve, reject) => {
-          return this.transmission.remove(ids, del, (err, args) => {
-              if (err) {
-                  return reject(err);
-              }
-              resolve(args);
-          });
-      });
-  }
+        return new Promise((resolve, reject) => {
+            return this.transmission.remove(ids, del, (err, args) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve(args);
+            });
+        });
+    }
 
     public active(): Promise<ITorrentRes> {
         return new Promise((resolve, reject) => {
